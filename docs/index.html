@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>فروع بندوق تشيكن في القاهرة</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            background: #ffe500;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .topbar-left,
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #111;
+            color: #fff;
+            border-radius: 999px;
+            padding: 8px 18px;
+            font-size: 13px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-link {
+            font-size: 13px;
+            color: #111;
+            cursor: pointer;
+        }
+
+        .logo-text {
+            font-weight: 700;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ff7a1a, #f44336);
+            color: #fff;
+            padding: 40px 16px 26px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .search-row {
+            max-width: 520px;
+            margin: 0 auto;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .search-input-wrap {
+            position: relative;
+            flex: 1 1 260px;
+            max-width: 360px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 36px 10px 12px;
+            border-radius: 999px;
+            border: none;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .search-btn {
+            background: #ffe500;
+            color: #111;
+            border-radius: 999px;
+            border: none;
+            padding: 10px 26px;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .branches-section {
+            margin-top: 32px;
+            padding: 0 16px 40px;
+        }
+
+        .branches-grid {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        @media (min-width: 720px) {
+            .branches-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .branches-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .branch-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+            display: flex;
+            flex-direction: column;
+            min-height: 260px;
+        }
+
+        .branch-image {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .status-pill {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1b5e20;
+            font-size: 11px;
+            border-radius: 999px;
+            padding: 4px 10px;
+        }
+
+        .branch-body {
+            padding: 14px 14px 8px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 13px;
+        }
+
+        .branch-title {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .branch-address {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .branch-phone {
+            color: #0d47a1;
+            font-weight: 600;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .branch-phone span {
+            display: block;
+        }
+
+        .branch-map {
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #1b5e20;
+            font-size: 12px;
+        }
+
+        .branch-map a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .branch-map a:hover {
+            text-decoration: underline;
+        }
+
+        .branch-footer {
+            padding: 10px 14px 14px;
+        }
+
+        .cta-btn {
+            width: 100%;
+            background: #ffe500;
+            color: #111;
+            border-radius: 999px;
+            border: none;
+            padding: 10px 0;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .footer {
+            background: #d32f2f;
+            color: #ffe5e5;
+            font-size: 11px;
+            padding: 12px 16px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: #ffe5e5;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <header class="topbar">
+            <div class="topbar-left">
+                <a class="nav-link" href="https://bondok.bonbell.online/restaurants/906" target="_blank" rel="noopener">
+                    المنيو
+                </a>
+            </div>
+            <div class="topbar-right">
+                <span class="logo-text">بندق فرايد تشيكن</span>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1 class="hero-title"> فروعنا في القاهرة والجيزه</h1>
+            <p class="hero-subtitle">
+                أقرب فرع ليك دايمًا جنبك، استمتع بألذ الوجبات السريعة في أي وقت ومن أي مكان.
+            </p>
+            <div class="search-row">
+                <div class="search-input-wrap">
+                    <input id="searchInput" type="text" class="search-input"
+                        placeholder="ابحث عن منطقتك أو اسم الفرع" />
+                    <span class="search-icon">🔍</span>
+                </div>
+                <button class="search-btn" onclick="renderBranches()">بحث</button>
+            </div>
+        </section>
+
+        <main class="branches-section">
+            <div id="branchesGrid" class="branches-grid"></div>
+        </main>
+
+        <footer class="footer">
+            جميع الحقوق محفوظة لمطعم بندوق تشيكن © 2024 ·
+            <a href="#">سياسة الخصوصية</a> · <a href="#">الشروط والأحكام</a>
+        </footer>
+    </div>
+
+    <script>
+        // الداتا في const واحد
+        const branches = [
+            {
+                id: 1,
+                name: "فرع حدائق أكتوبر",
+                address: "داخل جولف كورنر مول - حدائق أكتوبر",
+                phones: ["01090980105", "01124613130", "01203567836"],
+                mainPhone: "01090980105",
+                mapsUrl: "https://maps.app.goo.gl/Jr9UT5tvt3ptfwz89?g_st=aw",
+                imageUrl: "./1.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 2,
+                name: "فرع حدائق الأهرام",
+                address: "المول التجاري القديم (ز)",
+                phones: ["01020035330", "01152272285", "01200325905"],
+                mainPhone: "01020035330",
+                mapsUrl: "https://share.google/AKkYVCQZFQHkbktBs",
+                imageUrl: "./2.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 3,
+                name: "فرع حدائق المعادي",
+                address: "شارع حسنين دسوقي من شارع 9",
+                phones: ["01008564564", "01212909898", "01128228211"],
+                mainPhone: "01008564564",
+                mapsUrl: "https://share.google/qDdoK2GV00PIEt02C",
+                imageUrl: "./3.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 4,
+                name: "فرع زهراء المعادي",
+                address: "50 شارع الخمسين",
+                phones: ["01018858808", "01202291495", "01119567111"],
+                mainPhone: "01018858808",
+                mapsUrl: "https://share.google/qWDC6vYvhA0ronZI7",
+                imageUrl: "./4.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 5,
+                name: "فرع الهرم",
+                address: "الممشي السياحي محطة مشعل - أمام كارفور مشعل - الهرم (جديد)",
+                phones: ["01070020100", "01211110685", "01114445679"],
+                mainPhone: "01070020100",
+                mapsUrl: "https://maps.app.goo.gl/fWPHyqCrmUw4LbMt7?g_st=ipc",
+                imageUrl: "./5.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 6,
+                name: "فرع العبور",
+                address: "هب مول العبور",
+                phones: ["01080315028", "01147119213", "01272873336"],
+                mainPhone: "01080315028",
+                mapsUrl: "https://maps.app.goo.gl/QLEVzMuxWe7MombA8",
+                imageUrl: "./6.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 7,
+                name: "فرع الشيخ زايد",
+                address: "ممشي سيتي ووك - وصلة دهشور - الشيخ زايد - بجوار SASA كافيه",
+                phones: ["01103016020", "01044002216", "01211666415"],
+                mainPhone: "01103016020",
+                mapsUrl: "https://maps.app.goo.gl/WVSTN69CeEkeZPRWA?g_st=aw",
+                imageUrl: "./7.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 8,
+                name: "فرع الرحاب",
+                address: "السوق القديم - أمام صيدليه العزبي",
+                phones: ["01108425702", "01097279903", "01220300816"],
+                mainPhone: "01108425702",
+                mapsUrl: "https://maps.app.goo.gl/qvkG2LegEh6bEFML7",
+                imageUrl: "./8.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 9,
+                name: "فرع التجمع الخامس",
+                address: "مجمع البنوك - بجوار حضر موت عنتر",
+                phones: ["01220300618", "01108425701", "01065750737"],
+                mainPhone: "01220300618",
+                mapsUrl: "https://maps.app.goo.gl/UUsN9B2u4kxA3bYy5?g_st=aw",
+                imageUrl: "./9.jpg",
+                status: "مفتوح الآن",
+            },
+            {
+                id: 10,
+                name: "حدائق الأهرام 2",
+                address: "شيل آوت البوابة الرابعة - طريق الواحات - خلف حلواني العبد",
+                phones: ["01055165791"],
+                mainPhone: "01055165791",
+                mapsUrl: "https://maps.app.goo.gl/fkWef8HB8GNhihvN9?g_st=aw",
+                imageUrl: "./10.jpg",
+                status: "مفتوح الآن",
+            },
+        ];
+
+        function createPhoneLines(phones) {
+            return phones.map(p => `<span>${p}</span>`).join("");
+        }
+
+        function renderBranches() {
+            const grid = document.getElementById("branchesGrid");
+            const searchValue = document
+                .getElementById("searchInput")
+                .value.trim(); // من غير toLowerCase [web:14]
+
+            const filtered = branches.filter((b) => {
+                if (!searchValue) return true;
+                return b.name.includes(searchValue); // بحث باسم الفرع فقط
+            });
+
+            grid.innerHTML = filtered.map((b) => `
+      <article class="branch-card">
+        <div class="branch-image" style="background-image:url('${b.imageUrl}');">
+          <span class="status-pill">${b.status}</span>
+        </div>
+        <div class="branch-body">
+          <h2 class="branch-title">${b.name}</h2>
+          <p class="branch-address">${b.address}</p>
+          <div class="branch-phone">
+            ${createPhoneLines(b.phones)}
+          </div>
+          <div class="branch-map">
+            <span>📍</span>
+            <a href="${b.mapsUrl}" target="_blank" rel="noopener">
+              الموقع على الخريطة
+            </a>
+          </div>
+        </div>
+        <div class="branch-footer">
+          <a class="cta-btn" href="tel:${b.mainPhone}">
+            اطلب دليفري الآن 🚚
+          </a>
+        </div>
+      </article>
+    `).join("");
+        }
+
+        renderBranches();
+
+        document.getElementById("searchInput").addEventListener("input", renderBranches);
+    </script>
+
+
+</body>
+
+</html>
